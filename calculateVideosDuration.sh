@@ -1,0 +1,1 @@
+find "folderPath" -name "*.mp4" | xargs -I {} ffmpeg -i {} 2>&1 | grep "Duration" | awk '{split($2,a,":"); print a[1]*3600+a[2]*60+a[3]}' | awk '{sum+=$1} END {print "Duración total: " int(sum/3600) " horas " int((sum%3600)/60) " minutos " int(sum%60) " segundos"}'
